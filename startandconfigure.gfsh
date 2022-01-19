@@ -1,0 +1,27 @@
+# Start locator
+start locator --name=locator --classpath=../server/build/libs/server-0.0.1-SNAPSHOT.jar
+
+# Set screen width
+set variable --name=APP_RESULT_VIEWER --value=any
+
+# Configure PDX
+configure pdx --read-serialized=true --auto-serializable-classes=.*
+
+# Start Servers
+start server --name=server-1 --server-port=0 --statistic-archive-file=cacheserver.gfs --J=-Dgemfire.log-file=cacheserver.log --J=-Dgemfire.conserve-sockets=false --J=-DslowStartTimeForTesting=120000
+start server --name=server-2 --server-port=0 --statistic-archive-file=cacheserver.gfs --J=-Dgemfire.log-file=cacheserver.log --J=-Dgemfire.conserve-sockets=false --J=-DslowStartTimeForTesting=120000
+
+# Deploy Functions and Custom MBean
+deploy --jar=server/build/libs/server-0.0.1-SNAPSHOT.jar
+
+# Create Region
+create region --name=Trade --type=PARTITION_REDUNDANT --cache-listener=example.server.callback.MessageDispatcherSlowStartInitializer
+
+# List Members
+list members
+
+# List Functions
+list functions
+
+# List Regions
+list regions
