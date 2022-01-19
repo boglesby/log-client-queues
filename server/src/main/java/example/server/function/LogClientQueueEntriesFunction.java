@@ -1,4 +1,4 @@
-package org.apache.geode.internal.cache.ha;
+package example.server.function;
 
 import org.apache.geode.cache.Cache;
 import org.apache.geode.cache.Declarable;
@@ -6,6 +6,7 @@ import org.apache.geode.cache.execute.Function;
 import org.apache.geode.cache.execute.FunctionContext;
 import org.apache.geode.internal.cache.HARegion;
 import org.apache.geode.internal.cache.InternalCacheServer;
+import org.apache.geode.internal.cache.ha.HARegionQueue;
 import org.apache.geode.internal.cache.tier.sockets.AcceptorImpl;
 import org.apache.geode.internal.cache.tier.sockets.CacheClientProxy;
 
