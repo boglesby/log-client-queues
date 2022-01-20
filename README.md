@@ -258,19 +258,19 @@ Sample output from the *runclient.sh* script is:
 The server log files will contain a message like:
 
 ```
-[info 2022/01/19 12:55:54.876 HST server-2 <ServerConnection on port 50929 Thread 4> tid=0x5f] The server contains the following 1 client queue:
-	CacheClientProxy[identity(192.168.1.12(client:6366:loner):50957:98ed8c74:client,connection=1; port=50965; primary=true; version=GEODE 1.14.0] queueSize=101
-		key=1; value=org.apache.geode.internal.cache.tier.sockets.ClientMarkerMessageImpl@5a715129
-		key=2; value=HAEventWrapper[region=/Trade; key=0; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=0]; no message]
-		key=3; value=HAEventWrapper[region=/Trade; key=1; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=1]; no message]
-		key=4; value=HAEventWrapper[region=/Trade; key=2; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=2]; no message]
-		key=5; value=HAEventWrapper[region=/Trade; key=3; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=3]; no message]
+[info 2022/01/20 11:16:31.911 HST server-1 <ServerConnection on port 62525 Thread 4> tid=0x64] The server contains the following 2 queues:
+  CacheClientProxy[identity(192.168.1.12(client:11810:loner):62581:ef705879:client,connection=1; port=62589; primary=true; version=GEODE 1.14.0] queueSize=101
+    key=1; value=org.apache.geode.internal.cache.tier.sockets.ClientMarkerMessageImpl@301540b7
+    key=2; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=0;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=0];shouldConflate=false;versionTag={v1; rv1; mbr=192.168.1.12(server-2:11732)<v2>:41002; time=1642713380551; remote};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=0}
+    key=3; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=1;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=1];shouldConflate=false;versionTag={v1; rv1; time=1642713380586};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=1}
+    key=4; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=2;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=2];shouldConflate=false;versionTag={v1; rv1; time=1642713380597};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=2}
+    key=5; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=3;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=3];shouldConflate=false;versionTag={v1; rv1; mbr=192.168.1.12(server-2:11732)<v2>:41002; time=1642713380607; remote};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=3}
     ...
-		key=97; value=HAEventWrapper[region=/Trade; key=95; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=95]; no message]
-		key=98; value=HAEventWrapper[region=/Trade; key=96; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=96]; no message]
-		key=99; value=HAEventWrapper[region=/Trade; key=97; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=97]; no message]
-		key=100; value=HAEventWrapper[region=/Trade; key=98; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=98]; no message]
-		key=101; value=HAEventWrapper[region=/Trade; key=99; refCount=1; putInProgress=0; event=EventID[id=31 bytes;threadID=938533;sequenceID=99]; no message]
+    key=97; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=95;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=95];shouldConflate=false;versionTag={v1; rv1; mbr=192.168.1.12(server-2:11732)<v2>:41002; time=1642713381003; remote};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=95}
+    key=98; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=96;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=96];shouldConflate=false;versionTag={v1; rv1; time=1642713381008};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=96}
+    key=99; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=97;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=97];shouldConflate=false;versionTag={v1; rv1; mbr=192.168.1.12(server-2:11732)<v2>:41002; time=1642713381012; remote};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=97}
+    key=100; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=98;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=98];shouldConflate=false;versionTag={v1; rv1; time=1642713381018};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=98}
+    key=101; message=ClientUpdateMessageImpl[op=AFTER_CREATE;region=/Trade;key=99;isObject=1;cbArg=null;memberId=identity(192.168.1.12(client:11825:loner):62619:28f05879:client,connection=1;eventId=EventID[id=31 bytes;threadID=380423;sequenceID=99];shouldConflate=false;versionTag={v1; rv2; mbr=192.168.1.12(server-2:11732)<v2>:41002; time=1642713381021; remote};hasCqs=false]; regionValue=PDX[9138121,example.client.domain.Trade]{id=99}
 ```
 ### Shutdown Locator and Servers
 Sample output from the *shutdownall.sh* script is:
