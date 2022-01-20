@@ -8,6 +8,7 @@ import org.apache.geode.internal.cache.HARegion;
 import org.apache.geode.internal.cache.InternalCacheServer;
 import org.apache.geode.internal.cache.ha.HARegionQueue;
 import org.apache.geode.internal.cache.tier.sockets.AcceptorImpl;
+import org.apache.geode.internal.cache.tier.sockets.CacheClientNotifier;
 import org.apache.geode.internal.cache.tier.sockets.CacheClientProxy;
 
 import java.util.Collection;
@@ -20,15 +21,21 @@ public class LogClientQueueEntriesFunction implements Function<Object[]>, Declar
   public void execute(FunctionContext<Object[]> context) {
     Cache cache = context.getCache();
     cache.getLogger().info("Executing function id=" + getId());
-    InternalCacheServer cacheServer = (InternalCacheServer) cache.getCacheServers().iterator().next();
-    AcceptorImpl acceptor = (AcceptorImpl) cacheServer.getAcceptor();
-    dumpClientQueuesUsingRegionKeys(cache, acceptor);
+    Collection<CacheClientProxy> proxies = getCacheClientProxies(cache);
+    dumpClientQueuesUsingRegionKeys(cache, proxies);
     context.getResultSender().lastResult(true);
   }
 
-  private void dumpClientQueuesUsingRegionKeys(Cache cache, AcceptorImpl acceptor) {
+  private Collection<CacheClientProxy> getCacheClientProxies(Cache cache) {
+    InternalCacheServer cacheServer = (InternalCacheServer) cache.getCacheServers().iterator().next();
+    AcceptorImpl acceptor = (AcceptorImpl) cacheServer.getAcceptor();
+    CacheClientNotifier notifier = acceptor.getCacheClientNotifier();
+    Collection<CacheClientProxy> proxies = notifier.getClientProxies();
+    return proxies;
+  }
+
+  private void dumpClientQueuesUsingRegionKeys(Cache cache, Collection<CacheClientProxy> proxies) {
     StringBuilder builder = new StringBuilder();
-    Collection<CacheClientProxy> proxies = acceptor.getCacheClientNotifier().getClientProxies();
     builder.append("The server contains the following ").append(proxies.size()).append(" client queues:");
     for (CacheClientProxy proxy : proxies) {
       HARegionQueue harq = proxy.getHARegionQueue();
